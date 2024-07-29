@@ -1,0 +1,37 @@
+schemaVersion: 2.2.0
+metadata:
+  name: parasol-insurance
+attributes:
+  controller.devfile.io/storage-type: ephemeral
+components:
+  - name: tools
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-latest
+      env:
+        - name: QUARKUS_HTTP_HOST
+          value: 0.0.0.0
+      endpoints:
+        - exposure: none
+          name: debug
+          protocol: tcp
+          targetPort: 5005
+        - exposure: none
+          name: test
+          protocol: http
+          targetPort: 8081
+        - exposure: public
+          name: parasol-webui
+          protocol: https
+          targetPort: 8080
+        - exposure: public
+          name: quarkus-devui
+          path: /q/dev
+          protocol: https
+          targetPort: 8080
+      memoryRequest: 5Mi
+      memoryLimit: 6G
+      cpuRequest: 1000m
+      cpuLimit: 4000m
+events:
+  postStart:
+    - package
