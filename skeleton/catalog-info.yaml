@@ -41,11 +41,9 @@ metadata:
   name: workshop-system-${{values.namespace}}
   tags:
     - backstage
-    - janus-idp
     - rhoai
     - ai
     - aiworkshop
-    - rad
     - llm
 spec:
   owner: ${{values.owner | dump}}
