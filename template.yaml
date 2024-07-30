@@ -21,7 +21,7 @@ spec:
         - group
       properties:
         host:
-          title: Gitlab Host
+          title: GitLab Host
           type: string
           description: Your GitLab host
           default: gitlab-gitlab.apps.cluster-xxxxx.xxxxx.sandboxXXX.opentlc.com
