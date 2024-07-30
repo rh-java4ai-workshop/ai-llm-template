@@ -24,7 +24,7 @@ spec:
           title: Gitlab Host
           type: string
           description: Your GitLab host
-          ui:autofocus: true
+          default: gitlab-gitlab.apps.cluster-xxxxx.xxxxx.sandboxXXX.opentlc.com
         group:
           title: Group Id
           type: string
@@ -40,6 +40,7 @@ spec:
           title: Cluster Id
           type: string
           description: Id of the cluster
+           default: .apps.cluster-xxxxx.xxxxx.sandboxxx.opentlc.com
         namespace: 
           title: Namespace
           type: string
