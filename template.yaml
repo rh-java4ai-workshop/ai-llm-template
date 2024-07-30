@@ -3,7 +3,7 @@ kind: Template
 metadata:
   name: ai-llm-template
   title: Parasol Insurance for Red Hat AI App Development (RAD) Workshop
-  description: Creates the Parasol Insurance Application for Red Hat AI App Development (RAD) Workshop
+  description: Create the Parasol Insurance Application for Red Hat AI App Development (RAD) Workshop
   tags:
     - java
     - aiworkshop
