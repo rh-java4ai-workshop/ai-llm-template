@@ -28,8 +28,8 @@ spec:
         group:
           title: Group Id
           type: string
-          default: rhdh
           description: Your GitLab group ID
+          default: rhdhub
     - title: Provide information about the new component
       required:
         - cluster_id
@@ -40,7 +40,7 @@ spec:
           title: Cluster Id
           type: string
           description: Id of the cluster
-           default: .apps.cluster-xxxxx.xxxxx.sandboxxx.opentlc.com
+          default: .apps.cluster-xxxxx.xxxxx.sandboxxx.opentlc.com
         namespace: 
           title: Namespace
           type: string
@@ -143,7 +143,7 @@ spec:
       input:
         appName: ${{parameters.component_id}}-gitops
         argoInstance: main
-        namespace: devhub
+        namespace: rhdhub
         repoUrl: https://${{ parameters.host }}/${{ parameters.group }}/${{parameters.component_id}}-gitops.git
         path: 'argocd/'
   output:
