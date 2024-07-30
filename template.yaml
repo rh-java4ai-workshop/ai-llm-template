@@ -1,34 +1,33 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: ai-llm-template
-  title: Parasol Insurance for Red Hat AI App Development (RAD) Workshop
-  description: Create the Parasol Insurance Application for Red Hat AI App Development (RAD) Workshop
+  name: app-quarkus-template
+  title: Quarkus Backend Application
+  description: creates the quarkus backend app for the workshop
   tags:
     - java
-    - aiworkshop
-    - ai
-    - llm
-    - rad
+    - quarkus
+    - maven
+    - workshop
 spec:
-  owner: danieloh
+  owner: dev-mad
   type: service
 
   parameters:
     - title: Provide information about the GitLab location
       required:
-        - host
         - group
+        - host
       properties:
         host:
-          title: Gitlab Host
+          title: Repo Host
           type: string
-          description: Your GitLab host
+          description: Your SCM host
           default: gitlab-gitlab.apps.cluster-xxxxx.xxxxx.sandboxXXX.opentlc.com
         group:
-          title: Group Id
+          title: Repo Group
           type: string
-          description: Your GitLab group ID
+          description: Your SCM host organization/group
           default: rhdhub
     - title: Provide information about the new component
       required:
@@ -45,7 +44,7 @@ spec:
           title: Namespace
           type: string
           description: Namespace
-          default: parasol-userN
+          default: rhdhub-userN
         owner:
           title: Owner
           type: string
@@ -72,9 +71,9 @@ spec:
           description: Image tag to use for storing in the internal registry
         component_id:
           title: Component ID
-          default: parasol-app-userN
+          default: inventory-app-userN
           type: string
-          description: Component Id
+          description: Comp Id
   steps:
     - id: templateSource
       name: Generating the source code component
@@ -99,7 +98,7 @@ spec:
         repoUrl: ${{ parameters.host }}?owner=${{ parameters.group }}&repo=${{parameters.component_id}}
         defaultBranch: main
         protectDefaultBranch: false
-        repoVisibility: public
+        repoVisibility: public    
     - id: registerSource
       name: Registering the Source Code Component
       action: catalog:register
