@@ -43,7 +43,7 @@ metadata:
     - backstage
     - rhoai
     - ai
-    - aiworkshop
+    - workshop
     - llm
 spec:
   owner: ${{values.owner | dump}}

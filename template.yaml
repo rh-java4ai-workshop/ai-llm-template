@@ -6,12 +6,12 @@ metadata:
   description: Create the Parasol Insurance Application for Red Hat AI App Development (RAD) Workshop
   tags:
     - java
-    - aiworkshop
     - ai
     - llm
-    - rad
+    - redhatai
+    - workshop
 spec:
-  owner: danieloh
+  owner: rad-workshop-authors
   type: service
 
   parameters:
