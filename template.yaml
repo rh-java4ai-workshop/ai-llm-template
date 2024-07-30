@@ -6,25 +6,26 @@ metadata:
   description: Creates the Parasol Insurance Application for Red Hat AI App Development (RAD) Workshop
   tags:
     - java
-    - quarkus
     - aiworkshop
-    - parasol
+    - ai
+    - llm
     - rad
 spec:
-  owner: dev-rad
+  owner: danieloh
   type: service
 
   parameters:
     - title: Provide information about the GitLab location
       required:
-        - group
         - host
+        - group
       properties:
         host:
           title: Gitlab Host
           type: string
           description: Your GitLab host
-        group_id:
+          ui:autofocus: true
+        group:
           title: Group Id
           type: string
           default: rhdh
@@ -43,7 +44,7 @@ spec:
           title: Namespace
           type: string
           description: Namespace
-          default: coolstore-userN
+          default: parasol-userN
         owner:
           title: Owner
           type: string
@@ -70,7 +71,7 @@ spec:
           description: Image tag to use for storing in the internal registry
         component_id:
           title: Component ID
-          default: coolstore-ai-app-userN
+          default: parasol-app-userN
           type: string
           description: Component Id
   steps:
@@ -81,7 +82,7 @@ spec:
         url: ./skeleton
         targetPath: ./source
         values:
-          group_id: ${{parameters.group_id}}
+          group: ${{parameters.group}}
           owner: default/${{parameters.owner}}
           cluster_id: ${{parameters.cluster_id}}
           namespace: ${{parameters.namespace}}
@@ -97,7 +98,7 @@ spec:
         repoUrl: ${{ parameters.host }}?owner=${{ parameters.group }}&repo=${{parameters.component_id}}
         defaultBranch: main
         protectDefaultBranch: false
-        repoVisibility: public    
+        repoVisibility: public
     - id: registerSource
       name: Registering the Source Code Component
       action: catalog:register

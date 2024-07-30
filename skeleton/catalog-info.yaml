@@ -46,7 +46,7 @@ metadata:
     - ai
     - aiworkshop
     - rad
-    - parasol
+    - llm
 spec:
   owner: ${{values.owner | dump}}
 
