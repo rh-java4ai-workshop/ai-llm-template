@@ -142,7 +142,7 @@ spec:
       input:
         appName: ${{parameters.component_id}}-gitops
         argoInstance: main
-        namespace: globex-devhub
+        namespace: devhub
         repoUrl: https://${{ parameters.host }}/${{ parameters.group }}/${{parameters.component_id}}-gitops.git
         path: 'argocd/'
   output:
