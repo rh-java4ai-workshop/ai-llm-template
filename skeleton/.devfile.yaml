@@ -10,6 +10,14 @@ components:
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
+        - name: KUBEDOCK_ENABLED
+          value: 'true'
+        - name: DOCKER_HOST
+          value: 'tcp://127.0.0.1:2475'
+        - name: TESTCONTAINERS_RYUK_DISABLED
+          value: 'true'
+        - name: TESTCONTAINERS_CHECKS_DISABLE
+          value: 'true'
       endpoints:
         - exposure: none
           name: debug
@@ -25,7 +33,12 @@ components:
           targetPort: 8080
         - exposure: public
           name: quarkus-devui
-          path: /q/dev
+          path: /q/dev-ui
+          protocol: https
+          targetPort: 8080
+        - exposure: public
+          name: mailpit
+          path: /q/mailpit
           protocol: https
           targetPort: 8080
       memoryRequest: 5Mi
