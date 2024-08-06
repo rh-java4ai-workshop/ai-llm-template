@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ .Values.applicationName }}
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"{{ .Values.applicationName }}:{{ .Values.image.tag | default .Chart.AppVersion }}","namespace":"{{ .Values.app.namespace }}"},"fieldPath":"spec.template.spec.containers[?(@.name==\"{{ .Values.applicationName }}\")].image","pause":"false"}]
+  labels:
+    {{- include "backstage.labels" . | nindent 4 }}
+    {{- include "quarkus-backend.labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: {{ .Values.deploymentStrategy.type }}
+    {{- if eq .Values.deploymentStrategy.type "RollingUpdate" }}
+    {{- with .Values.deploymentStrategy }}
+    rollingUpdate:
+      maxSurge: {{ .rollingMaxSurge }}
+      maxUnavailable: {{ .rollingMaxUnavailable }}
+    {{- end }}
+    {{- end }}
+    {{- if eq .Values.deploymentStrategy.type "Recreate" }}
+    recreateParams:
+      timeoutSeconds: {{ .Values.deploymentStrategy.timeout }}
+    {{- end }}
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "quarkus-backend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      name: {{ .Values.applicationName }}
+      labels:
+        {{- include "backstage.labels" . | nindent 8 }}
+        {{- include "quarkus-backend.selectorLabels" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriod | default 60 }}
+      serviceAccountName: {{ include "quarkus-backend.serviceAccountName" . }}
+      containers:
+      - name: {{ .Values.applicationName }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: Always
+        ports:
+          - containerPort: {{ .Values.port }}
+            protocol: TCP
+          - containerPort: {{ .Values.portHTTPS }}
+            protocol: TCP
+        {{- with .Values.env }}
+        env:
+          {{- toYaml . | nindent 12 }}
+        {{- end }}
+        resources: {{ if not .Values.limits}}{}{{end}}
+          {{- if .Values.limits }}
+          limits:
+            cpu: {{ .Values.limits.cpu }}
+            memory: {{ .Values.limits.memory }}
+          {{- end }}
+          {{- if .Values.requests }}
+          requests:
+            cpu: {{ .Values.requests.cpu }}
+            memory: {{ .Values.requests.memory }}
+          {{- end }}
