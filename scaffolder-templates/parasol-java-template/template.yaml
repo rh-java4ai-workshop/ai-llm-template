@@ -24,7 +24,7 @@ spec:
           title: Name
           type: string
           description: Unique name of the component
-          default: parasol-app
+          default: parasol-app-userXX
           ui:field: EntityNamePicker
           maxLength: 23
         group_id:
