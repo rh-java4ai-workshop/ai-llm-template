@@ -6,4 +6,4 @@ metadata:
 spec:
   type: url
   targets:
-     - https://{{ gitlab_host }}/{{ gitlab_group }}/ai-llm-templates/blob/main/scaffolder-templates/parasol-java-template/template.yaml
+     - scaffolder-templates/parasol-java-template/template.yaml
