@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: ai-llm-templates
+  description: A collection of Red Hat AI LLM templates for AI Workshop
+spec:
+  type: url
+  targets:
+     - https://{{ gitlab_host }}/{{ gitlab_group }}/ai-llm-templates/blob/main/scaffolder-templates/template.yaml
