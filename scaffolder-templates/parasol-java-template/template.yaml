@@ -41,7 +41,7 @@ spec:
           title: Java Package Name
           default: org.redhat.janus
           type: string
-          description: Name for the java package. eg (com.redhat.blah)
+          description: Name for the java package. e.g., (com.redhat.example)
         description:
           title: Description
           type: string
