@@ -35,6 +35,8 @@ spec:
         workspace: source
   - name: maven
     params:
+    - name: MAVEN_IMAGE
+      value: $(params.maven-image)
     - name: GOALS
       value:
       - package
