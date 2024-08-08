@@ -39,11 +39,11 @@ spec:
     - name: MAVEN_IMAGE
       value: $(params.maven-image)
     - name: GOALS
-      value: "package -DskipTests"
+      value: package
     - name: PROXY_PROTOCOL
       value: http
     - name: CONTEXT_DIR
-      value: .
+      value: app
     runAfter:
       - fetch-repository
     taskRef:
