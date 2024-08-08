@@ -8,7 +8,7 @@ git:
   repo: ${{values.source_repository}}
   org: ${{values.org}}
   name: ${{values.repository_name}}
-  host: ${{values.git_host}}
+  host: ${{values.repository_host}}
   token: ''
   webhookSecret: 'secret-webhook'
 
