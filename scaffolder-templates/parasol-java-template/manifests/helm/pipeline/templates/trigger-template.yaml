@@ -28,6 +28,8 @@ spec:
             value: $(tt.params.git-revision)
           - name: output-image
             value: $(tt.params.output-image)
+          - name: maven-image
+            value: registry.redhat.io/ubi9/openjdk-21
         pipelineRef:
           name: {{ .Values.app.name }}-pipeline
         serviceAccountName: pipeline

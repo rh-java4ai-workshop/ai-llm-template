@@ -16,6 +16,8 @@ spec:
     description: reference of the image that will get created
     default: {{ include "image.url" . }}
     type: string
+  - name: maven-image
+      type: string
   tasks:
   - name: fetch-repository
     params:
