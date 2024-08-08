@@ -12,7 +12,7 @@ spec:
         - params:
           - name: secretRef
             value:
-              secretKey: password
+              secretKey: secret
               secretName: {{ .Values.app.name }}-webhook-secret
           ref:
             name: gitlab

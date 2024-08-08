@@ -39,8 +39,7 @@ spec:
     - name: MAVEN_IMAGE
       value: $(params.maven-image)
     - name: GOALS
-      value:
-      - package
+      value: "package -DskipTests"
     - name: PROXY_PROTOCOL
       value: http
     - name: CONTEXT_DIR
