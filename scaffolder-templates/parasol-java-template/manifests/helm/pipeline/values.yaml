@@ -12,13 +12,12 @@ git:
   token: ''
   webhookSecret: 'secret-webhook'
 
-
 image:
-  host: ${{values.image_host}}
-  name: ${{values.image_name}}
-  tag: ${{values.image_tag}}
-
-
+  registry: ${{values.image_registry}}
+  organization: ${{values.image_organization}}
+  host: ${{ values.image_host }}
+  name: ${{ values.image_name }}
+  tag: ${{ values.image_tag }}
 
 pipelineStorage:
   pvcSize: 1Gi
