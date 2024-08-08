@@ -6,8 +6,8 @@ spec:
   serviceAccountName: pipeline
   triggers:
     - bindings:
-        - kind: ClusterTriggerBinding
-          ref: gitlab-push
+        - kind: TriggerBinding
+          ref: commit-binding
       interceptors:
         - params:
           - name: secretRef
@@ -17,17 +17,12 @@ spec:
           ref:
             name: gitlab
         - params:
-            - name: eventTypes
-              value: ["Push Hook"]
-          ref:
-            name: gitlab
-        - params:
-            - name: git-revision
-              value: >-
-                (body.ref.contains('{{ .Values.git.branch }}'))
+            - name: filter
+              value: has(body.commits) && body.object_kind == 'push'
             - name: overlays
               value: null
           ref:
+            kind: ClusterInterceptor
             name: cel
       template:
         ref: {{ .Values.app.name }}-run-pipeline

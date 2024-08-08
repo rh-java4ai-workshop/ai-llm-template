@@ -8,17 +8,17 @@ metadata:
     backstage.io/kubernetes-id: {{ .Values.app.name }}
 spec:
   params:
-  - name: git-url
-    default: {{ .Values.git.repo }}
-  - name: git-branch
-    default: {{ .Values.git.branch }}
-  - name: output-image
-    description: reference of the image that will get created
-    default: {{ include "image.url" . }}
-    type: string
-  - name: maven-image
-    default: registry.redhat.io/ubi9/openjdk-21
-    type: string
+    - name: git-url
+      default: {{ .Values.git.repo }}
+    - name: git-branch
+      default: {{ .Values.git.branch }}
+    - name: output-image
+      description: reference of the image that will get created
+      default: {{ include "image.url" . }}
+      type: string
+    - name: maven-image
+      default: registry.redhat.io/ubi9/openjdk-21
+      type: string
   tasks:
   - name: fetch-repository
     params:
@@ -39,33 +39,34 @@ spec:
     - name: MAVEN_IMAGE
       value: $(params.maven-image)
     - name: GOALS
-      value: package
-    - name: PROXY_PROTOCOL
-      value: http
-    - name: CONTEXT_DIR
-      value: app
-    runAfter:
-      - fetch-repository
+      value: 
+      - package
+      - -DskipTests
     taskRef:
       kind: ClusterTask
       name: maven
     workspaces:
-      - name: maven-settings
-        workspace: maven-settings
       - name: source
         workspace: source
+      - name: maven-settings
+        workspace: maven-settings
+    runAfter:
+    - fetch-repository
   - name: build-and-push
     params:
       - name: IMAGE
         value: $(params.output-image)
     runAfter:
-    - maven
+      - maven
     taskRef:
-      kind: ClusterTask
-      name: buildah
+      kind: Task
+      name: kaniko
     workspaces:
       - name: source
         workspace: source
+      - name: dockerconfig
+        workspace: docker-config
   workspaces:
     - name: source
     - name: maven-settings
+    - name: docker-config

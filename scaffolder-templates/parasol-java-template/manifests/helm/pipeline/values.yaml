@@ -10,15 +10,14 @@ git:
   name: ${{values.repository_name}}
   host: ${{values.repository_host}}
   token: ''
-  webhookSecret: 'secret-webhook'
-
+  webhookSecret: ''
 
 image:
-  host: ${{values.image_host}}
-  name: ${{values.image_name}}
-  tag: ${{values.image_tag}}
-
-
+  registry: ${{values.image_registry}}
+  organization: ${{values.image_organization}}
+  host: ${{ values.image_host }}
+  name: ${{ values.image_name }}
+  tag: ${{ values.image_tag }}
 
 pipelineStorage:
   pvcSize: 1Gi
