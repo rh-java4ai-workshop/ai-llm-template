@@ -10,7 +10,7 @@ git:
   name: ${{values.repository_name}}
   host: ${{values.repository_host}}
   token: ''
-  webhookSecret: 'secret-webhook'
+  webhookSecret: ''
 
 image:
   registry: ${{values.image_registry}}
