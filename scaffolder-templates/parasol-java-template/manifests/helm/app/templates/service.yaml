@@ -1,19 +1,15 @@
-kind: Service
 apiVersion: v1
-spec:
-  ports:
-  - name: {{ .Values.portName }}
-    port: {{ .Values.port }}
-    targetPort: {{ .Values.targetPort }}
-  - name: {{ .Values.portNameHTTPS }}
-    port: {{ .Values.portHTTPS }}
-    targetPort: {{ .Values.targetPortHTTPS }}
-  selector:
-    {{- include "quarkus-backend.selectorLabels" $ | nindent 4 }}
+kind: Service
 metadata:
-  name: {{ .Values.applicationName }}
+  name: {{ include "quarkus-template.fullname" . }}
   labels:
-    {{- include "quarkus-backend.labels" . | nindent 4 }}
-    {{- include "backstage.labels" . | nindent 4 }}
-  annotations:
-    description: The web server's http port
+    {{- include "quarkus-template.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "quarkus-template.selectorLabels" . | nindent 4 }}
