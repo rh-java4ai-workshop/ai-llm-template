@@ -2,8 +2,9 @@
     "jest": {
         "nodeEnv": {
             "NODE_TLS_REJECT_UNAUTHORIZED": "0", 
-            "PARASOL_MODEL_URL": "https://xxx:443/v1/chat/completions",
-            "EMBEDDING_MODEL_URL": "http://localhost:9999/v1"
+            "PARASOL_MODEL_URL": "",
+            "EMBEDDING_MODEL_URL": "",
+            "PARASOL_MODEL_NAME": ""
         },
         "rootPath": "prompt-testing"
     }
