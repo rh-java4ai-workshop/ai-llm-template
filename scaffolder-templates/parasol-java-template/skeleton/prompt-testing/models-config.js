@@ -16,7 +16,7 @@ module.exports.getProviders = (systemPrompt) => {
        method: 'POST',
        headers: {'Content-Type': 'application/json'},
        body: {
-        model: "parasol-instruct",
+        model: process.env['PARASOL_MODEL_NAME'],
          messages : [   
            {
              content: systemPrompt,

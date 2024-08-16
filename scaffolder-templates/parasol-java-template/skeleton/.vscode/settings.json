@@ -2,8 +2,9 @@
     "jest": {
         "nodeEnv": {
             "NODE_TLS_REJECT_UNAUTHORIZED": "0", 
-            "PARASOL_MODEL_URL": "https://xxx:443/v1/chat/completions",
-            "EMBEDDING_MODEL_URL": "http://localhost:9999/v1"
+            "PARASOL_MODEL_URL": "https://parasol-instruct-predictor-aiworkshop${{values.cluster}}:443/v1/chat/completions",
+            "EMBEDDING_MODEL_URL": "https://parasol-embedding-predictor-aiworkshop${{values.cluster}}/v1",
+            "PARASOL_MODEL_NAME": "parasol-instruct"
         },
         "rootPath": "prompt-testing"
     }
