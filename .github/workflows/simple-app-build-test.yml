@@ -67,4 +67,5 @@ jobs:
             -Dquarkus.test.profile=ollama,test \
             -Dquarkus.test.integration-test-profile=ollama,prod \
             -Dquarkus.http.host=0.0.0.0 \
+            -Dquarkus.http.port=8080 \
             -Dmaven.compiler.release=${{ matrix.java }}
