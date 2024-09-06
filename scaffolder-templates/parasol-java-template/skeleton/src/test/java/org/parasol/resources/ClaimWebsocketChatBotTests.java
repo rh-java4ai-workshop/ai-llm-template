@@ -44,10 +44,11 @@ class ClaimWebsocketChatBotTests {
 	private static final String QUERY = "Should I approve this claim?";
 	private static final LocalDate INCEPTION_DATE = LocalDate.of(1954, 9, 30);
 	private static final List<String> RESPONSE = List.of("You", "should", "not", "approve", "this", "claim");
-	private static final ArgumentMatcher<ClaimBotQuery> CHAT_SERVICE_MATCHER = query -> Objects.nonNull(query) &&
-			(query.claimId() == 1L) &&
-			QUERY.equals(query.query()) &&
-			CLAIM.equals(query.claim());
+	private static final ArgumentMatcher<ClaimBotQuery> CHAT_SERVICE_MATCHER = query ->
+			Objects.nonNull(query) &&
+				(query.claimId() == 1L) &&
+				QUERY.equals(query.query()) &&
+				CLAIM.equals(query.claim());
 
 	@InjectMock
 	ClaimService claimService;
@@ -65,14 +66,13 @@ class ClaimWebsocketChatBotTests {
 
 	@Test
 	void chatBotWorks() {
-		// A Multi which will return our response with a 0.5 second delay between each
-		// item
+		// A Multi which will return our response with a 0.5 second delay between each item
 		var delayedMulti = Multi.createFrom().iterable(RESPONSE)
-				.onItem().call(() -> Uni.createFrom().nullItem().onItem().delayIt().by(Duration.ofMillis(500)));
+			.onItem().call(() -> Uni.createFrom().nullItem().onItem().delayIt().by(Duration.ofMillis(500)));
 
 		// Set up our AI mock
 		when(this.claimService.chat(argThat(CHAT_SERVICE_MATCHER)))
-				.thenReturn(delayedMulti);
+			.thenReturn(delayedMulti);
 
 		// Create a WebSocket connection and wait for the connection to establish
 		var connection = connectClient();
@@ -82,12 +82,12 @@ class ClaimWebsocketChatBotTests {
 
 		// Wait for the server to respond with what we expect
 		await()
-				.atMost(Duration.ofMinutes(5))
-				.until(() -> ClientEndpoint.MESSAGES.size() == RESPONSE.size());
+			.atMost(Duration.ofMinutes(5))
+			.until(() -> ClientEndpoint.MESSAGES.size() == RESPONSE.size());
 
 		// Verify the messages are what we expected
 		assertThat(ClientEndpoint.MESSAGES)
-				.hasSameElementsAs(RESPONSE);
+			.hasSameElementsAs(RESPONSE);
 
 		// Close the connection
 		connection.closeAndAwait();
@@ -103,7 +103,7 @@ class ClaimWebsocketChatBotTests {
 
 		// Set up mock to throw an error
 		when(this.claimService.chat(argThat(CHAT_SERVICE_MATCHER)))
-				.thenReturn(Multi.createFrom().failure(error));
+			.thenReturn(Multi.createFrom().failure(error));
 
 		// Create a WebSocket connection and wait for the connection to establish
 		var connection = connectClient();
@@ -113,12 +113,12 @@ class ClaimWebsocketChatBotTests {
 
 		// Wait for the server to respond with the error we expect
 		await()
-				.atMost(Duration.ofMinutes(5))
-				.until(() -> ClientEndpoint.MESSAGES.size() == 1);
+			.atMost(Duration.ofMinutes(5))
+			.until(() -> ClientEndpoint.MESSAGES.size() == 1);
 
 		assertThat(ClientEndpoint.MESSAGES)
-				.singleElement()
-				.isEqualTo("Error occurred during chat: %s".formatted(error.getMessage()));
+			.singleElement()
+			.isEqualTo("Error occurred during chat: %s".formatted(error.getMessage()));
 
 		// Close the connection
 		connection.closeAndAwait();
@@ -130,8 +130,8 @@ class ClaimWebsocketChatBotTests {
 
 	private WebSocketClientConnection connectClient() {
 		var connection = this.connector
-				.baseUri(this.claimChatBotRootUri)
-				.connectAndAwait();
+			.baseUri(this.claimChatBotRootUri)
+			.connectAndAwait();
 
 		waitForClientToStart();
 
@@ -140,8 +140,8 @@ class ClaimWebsocketChatBotTests {
 
 	private static void waitForClientToStart() {
 		await()
-				.atMost(Duration.ofMinutes(5))
-				.until(() -> "CONNECT".equals(ClientEndpoint.MESSAGES.poll()));
+			.atMost(Duration.ofMinutes(5))
+			.until(() -> "CONNECT".equals(ClientEndpoint.MESSAGES.poll()));
 	}
 
 	@WebSocketClient(path = "/ws/query", clientId = "c1")
@@ -168,8 +168,7 @@ class ClaimWebsocketChatBotTests {
 
 		@OnClose
 		void close(CloseReason closeReason, WebSocketClientConnection connection) {
-			this.logger.infof("[CLIENT] Closing endpoint %s: %s: %s", connection.id(), closeReason.getCode(),
-					closeReason.getMessage());
+			this.logger.infof("[CLIENT] Closing endpoint %s: %s: %s", connection.id(), closeReason.getCode(), closeReason.getMessage());
 		}
 	}
 }
