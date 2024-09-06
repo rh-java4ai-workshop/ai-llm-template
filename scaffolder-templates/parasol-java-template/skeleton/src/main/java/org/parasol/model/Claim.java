@@ -16,8 +16,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 public class Claim extends PanacheEntity {
     public String claimNumber;
     public String category;
-    public String policyNumber;
-    @Column(columnDefinition = "DATETIME")
+    public String policyNumber;    
+    @Column(columnDefinition="DATETIME")
     @Temporal(TemporalType.DATE)
     public LocalDate inceptionDate;
     public String clientName;
