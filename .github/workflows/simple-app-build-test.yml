@@ -34,7 +34,7 @@ concurrency:
 defaults:
   run:
     shell: bash
-    working-directory: scaffolder-templates/parasol-java-template
+    working-directory: scaffolder-templates/parasol-java-template/skeleton
 
 jobs:
   jvm-build-test:
