@@ -19,7 +19,7 @@ spec:
         name: otel-collector
     spec:
       containers:
-        - image: otel/opentelemetry-collector-contrib:0.109.0
+        - image: quay.io/rhappsvcs/opentelemetry-collector:0.109.0
           name: otel-collector
           args:
             - "--config=/conf/otel-collector-config.yml"
