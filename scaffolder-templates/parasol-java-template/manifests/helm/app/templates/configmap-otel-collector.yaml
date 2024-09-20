@@ -10,7 +10,7 @@ data:
           grpc:
 
     exporters:
-      jaeger:
+      otlp/jaeger:
         endpoint: jaeger:14250
         tls:
           insecure: true
@@ -31,4 +31,4 @@ data:
           processors:
             - batch
           exporters:
-            - jaeger
+            - otlp/jaeger

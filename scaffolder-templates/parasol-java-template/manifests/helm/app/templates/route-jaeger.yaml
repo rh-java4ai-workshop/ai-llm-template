@@ -11,3 +11,6 @@ spec:
   to:
     kind: Service
     name: jaeger
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
