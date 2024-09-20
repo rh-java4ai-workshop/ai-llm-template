@@ -1,10 +1,9 @@
 {
     "jest": {
         "nodeEnv": {
-            "NODE_TLS_REJECT_UNAUTHORIZED": "0", 
-            "PARASOL_MODEL_URL": "https://parasol-instruct-predictor-aiworkshop${{values.cluster}}:443/v1/chat/completions",
-            "EMBEDDING_MODEL_URL": "https://parasol-embedding-predictor-aiworkshop${{values.cluster}}/v1",
-            "PARASOL_MODEL_NAME": "parasol-instruct"
+            "PARASOL_MODEL_URL": "http://parasol-chat-predictor.aiworkshop.svc.cluster.local:8080/v1/chat/completions",
+            "EMBEDDING_MODEL_URL": "http://parasol-embedding-predictor.aiworkshop.svc.cluster.local:8080/v1",
+            "PARASOL_MODEL_NAME": "parasol-chat"
         },
         "rootPath": "prompt-testing"
     }
