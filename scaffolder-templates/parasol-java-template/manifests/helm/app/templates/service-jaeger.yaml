@@ -16,6 +16,10 @@ spec:
       name: grpc
       protocol: TCP
       targetPort: 14250
+    - port: 4317
+      name: grpc-receiver
+      protocol: TCP
+      targetPort: 4317
   selector:
     name: jaeger
   type: ClusterIP
