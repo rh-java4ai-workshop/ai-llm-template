@@ -8,10 +8,11 @@ data:
       otlp:
         protocols:
           grpc:
+            endpoint: 0.0.0.0:4317
 
     exporters:
       otlp/jaeger:
-        endpoint: jaeger:14250
+        endpoint: jaeger:4317
         tls:
           insecure: true
 
@@ -20,6 +21,7 @@ data:
 
     extensions:
       health_check:
+        endpoint: "0.0.0.0:13133"
 
     service:
       extensions:

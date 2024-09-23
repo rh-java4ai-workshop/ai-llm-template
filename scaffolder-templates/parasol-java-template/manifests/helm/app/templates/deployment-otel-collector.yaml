@@ -21,8 +21,36 @@ spec:
       containers:
         - image: quay.io/rhappsvcs/opentelemetry-collector:0.109.0
           name: otel-collector
+          readinessProbe:
+            httpGet:
+              path: /
+              port: health-check
+              scheme: HTTP
+            timeoutSeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: health-check
+              scheme: HTTP
+            timeoutSeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: health-check
+              scheme: HTTP
+            timeoutSeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
           args:
             - "--config=/conf/otel-collector-config.yml"
+            - "--feature-gates=-component.UseLocalHostAsDefaultHost"
           ports:
             - name: health-check
               containerPort: 13133
