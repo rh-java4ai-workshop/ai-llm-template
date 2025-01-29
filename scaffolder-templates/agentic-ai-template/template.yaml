@@ -125,20 +125,7 @@ spec:
                   title: Model Endpoint
                   type: string
                   description: AI Model Inference Service API
-            - properties:
-                ai_models:
-                  enum:
-                    - granite-3.1
-                model_name:
-                  title: Model Name
-                  type: string
-                  description: Name of the AI Model
-                  default: granite-3.1
-                model_endpoint:
-                  title: Model Endpoint
-                  type: string
-                  description: AI Model Inference Service API
-                  default: http://granite-3-predictor.aiworkshop.svc.cluster.local:8080/v1
+                  default: http://granite3-predictor.aiworkshop.svc.cluster.local:8080/v1
             - properties:
                 ai_models:
                   enum:
@@ -152,7 +139,21 @@ spec:
                   title: Model Endpoint
                   type: string
                   description: AI Model Inference Service API
-                  efault: http://llama3-predictor.aiworkshop.svc.cluster.local:8080/v1
+                  default: http://llama3-predictor.aiworkshop.svc.cluster.local:8080/v1
+            - properties:
+                ai_models:
+                  enum:
+                    - qwen2.5
+                model_name:
+                  title: Model Name
+                  type: string
+                  description: Name of the AI Model
+                  default: qwen2.5
+                model_endpoint:
+                  title: Model Endpoint
+                  type: string
+                  description: AI Model Inference Service API
+                  default: http://qwen-2-predictor.aiworkshop.svc.cluster.local:8080/v1
     - title: Model Context Protocol (MCP) Servers Information
       required:
         - mcp_servers
