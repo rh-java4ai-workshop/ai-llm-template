@@ -1,0 +1,28 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: {{ .Values.app.name }}-el
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - bindings:
+        - kind: TriggerBinding
+          ref: commit-binding
+      interceptors:
+        - params:
+          - name: secretRef
+            value:
+              secretKey: secret
+              secretName: {{ .Values.app.name }}-webhook-secret
+          ref:
+            name: gitlab
+        - params:
+            - name: filter
+              value: has(body.commits) && body.object_kind == 'push' && body.ref == 'refs/heads/master'
+            - name: overlays
+              value: null
+          ref:
+            kind: ClusterInterceptor
+            name: cel
+      template:
+        ref: {{ .Values.app.name }}-run-pipeline

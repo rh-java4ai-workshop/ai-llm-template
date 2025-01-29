@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  labels:
+    name: otel-collector
+    app.kubernetes.io/part-of: monitoring
+    app.openshift.io/runtime: opentelemetry
+  annotations:
+    app.openshift.io/connects-to: jaeger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: otel-collector
+  template:
+    metadata:
+      labels:
+        name: otel-collector
+    spec:
+      containers:
+        - image: quay.io/rhappsvcs/opentelemetry-collector:0.109.0
+          name: otel-collector
+          readinessProbe:
+            httpGet:
+              path: /
+              port: health-check
+              scheme: HTTP
+            timeoutSeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: health-check
+              scheme: HTTP
+            timeoutSeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: health-check
+              scheme: HTTP
+            timeoutSeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 3
+          args:
+            - "--config=/conf/otel-collector-config.yml"
+            - "--feature-gates=-component.UseLocalHostAsDefaultHost"
+          ports:
+            - name: health-check
+              containerPort: 13133
+            - name: otlp-receiver
+              containerPort: 4317
+          volumeMounts:
+            - name: otel-collector-config
+              mountPath: /conf
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              memory: 32Mi
+      volumes:
+        - name: otel-collector-config
+          configMap:
+            name: otel-collector-config

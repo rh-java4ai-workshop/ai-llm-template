@@ -1,0 +1,27 @@
+app:
+  name: ${{values.component_id}}
+  namespace: ${{values.namespace}}
+  cluster: ${{values.cluster}}
+
+git:
+  branch: main
+  repo: ${{values.source_repository}}
+  org: ${{values.org}}
+  name: ${{values.repository_name}}
+  host: ${{values.repository_host}}
+  token: ''
+  webhookSecret: ''
+
+image:
+  registry: ${{values.image_registry}}
+  organization: ${{values.image_organization}}
+  host: ${{ values.image_host }}
+  name: ${{ values.image_name }}
+  tag: ${{ values.image_tag }}
+
+pipelineStorage:
+  pvcSize: 1Gi
+  storageClassName: ""
+
+targetEnvironment: dev
+env: []

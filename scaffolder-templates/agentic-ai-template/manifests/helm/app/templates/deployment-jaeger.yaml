@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger
+  labels:
+    name: jaeger
+    app.kubernetes.io/part-of: monitoring
+    app.openshift.io/runtime: jaeger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: jaeger
+  template:
+    metadata:
+      labels:
+        name: jaeger
+    spec:
+      containers:
+        - image: quay.io/jaegertracing/all-in-one:1.61.0
+          name: jaeger
+          ports:
+            - containerPort: 16686
+            - containerPort: 14268
+            - containerPort: 14250
+            - containerPort: 4317
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              memory: 32Mi
