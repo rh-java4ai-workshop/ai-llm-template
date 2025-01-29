@@ -96,9 +96,9 @@ spec:
                   description: Build Image tag
     - title: AI Models (LLMs) Information
       required:
-        - ai_models
+        - ai_model
       properties:
-        ai_models:
+        ai_model:
           title: AI Models
           description: A Collection of AI Models for Building Agentic AI Applications
           type: string
@@ -111,43 +111,43 @@ spec:
             - mistral
             - phi3
       dependencies:
-        ai_modelss:
+        ai_model:
           oneOf:
             - properties:
-                ai_models:
+                ai_model:
                   enum:
                     - granite-3.1
                 model_name:
                   title: Model Name
                   type: string
-                  description: Name of the AI Model
+                  description: Granite-3.1 is a high-performance, open-source, distributed graph database.
                 model_endpoint:
                   title: Model Endpoint
                   type: string
                   description: AI Model Inference Service API
                   default: http://granite3-predictor.aiworkshop.svc.cluster.local:8080/v1
             - properties:
-                ai_models:
+                ai_model:
                   enum:
                     - llama3.3
                 model_name:
                   title: Model Name
                   type: string
                   description: Name of the AI Model
-                  default: llama3.3
+                  default: Llama 3.3 is a powerful and advanced large language model developed by Meta AI.
                 model_endpoint:
                   title: Model Endpoint
                   type: string
                   description: AI Model Inference Service API
                   default: http://llama3-predictor.aiworkshop.svc.cluster.local:8080/v1
             - properties:
-                ai_models:
+                ai_model:
                   enum:
                     - qwen2.5
                 model_name:
                   title: Model Name
                   type: string
-                  description: Name of the AI Model
+                  description: Qwen-2.5 is a large language model developed by Huawei, known for its advanced capabilities in natural language understanding and generation.
                   default: qwen2.5
                 model_endpoint:
                   title: Model Endpoint
@@ -156,9 +156,9 @@ spec:
                   default: http://qwen-2-predictor.aiworkshop.svc.cluster.local:8080/v1
     - title: Model Context Protocol (MCP) Servers Information
       required:
-        - mcp_servers
+        - mcp_server
       properties:
-        mcp_servers:
+        mcp_server:
           title: Model Context Protocol (MCP) servers
           description: A Collection of Model Context Protocol (MCP) Examples for Building Agentic AI Applications with Large Language Models (LLMs)
           type: string
@@ -171,10 +171,10 @@ spec:
             - GoogleMaps
             - Memory
       dependencies:
-        mcp_servers:
+        mcp_server:
           oneOf:
             - properties:
-                mcp_servers:
+                mcp_server:
                   enum:
                     - Filesystem
                 file_path:
@@ -183,7 +183,7 @@ spec:
                   description: Reads complete file contents with UTF-8 encoding
                   default: /projects/path/to/file.txt
             - properties:
-                mcp_servers:
+                mcp_server:
                   enum:
                     - PostgreSQL
                 psql_host:
@@ -236,7 +236,9 @@ spec:
           quay_destination: {{ '${{ parameters.image_organization}}' }}/{{ '${{ parameters.component_id }}' }}
           port: 8080
           verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
-          model: {{ '${{ parameters.model_id }}' }}
+          ai_model: {{ '${{ parameters.ai_model }}' }}
+          mcp_server: {{ '${{ parameters.mcp_server }}' }}
+          file_path: {{ '${{ parameters.mcp_server.file_path }}' }}
 
     - id: publish
       name: Publish
@@ -277,7 +279,9 @@ spec:
           deployment_name: quarkus-template
           user: {{ '${{ user.entity.metadata.name }}' }}
           verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
-          model: {{ '${{ parameters.model_id }}' }}
+          ai_model: {{ '${{ parameters.ai_model }}' }}
+          mcp_server: {{ '${{ parameters.mcp_server }}' }}
+          file_path: {{ '${{ parameters.mcp_server.file_path }}' }}
         targetPath: ./tenant-gitops
 
     - id: publish-gitops
