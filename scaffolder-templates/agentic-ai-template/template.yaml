@@ -210,16 +210,16 @@ spec:
               description: Your SCM host
               # default: {{ gitlab_host }}
               default: gitlab-gitlab.apps.cluster-k8ljc.k8ljc.sandbox2865.opentlc.com
-              enum:
-                - {{ gitlab_host }}
+              # enum:
+              #   - {{ gitlab_host }}
             owner:
               title: Repo Owner
               type: string
               description: Your SCM host organization/group
               # default: {{ gitlab_destination_group }}
               default: development
-              enum:
-                - {{ gitlab_destination_group }}
+              # enum:
+              #   - {{ gitlab_destination_group }}
 
   steps:
     - id: template
