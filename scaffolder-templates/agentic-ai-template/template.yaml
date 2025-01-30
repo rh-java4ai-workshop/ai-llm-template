@@ -121,7 +121,8 @@ spec:
                 model_name:
                   title: Model Name
                   type: string
-                  description: Granite-3.1 is a high-performance, open-source, distributed graph database.
+                  description: Name of the AI Model
+                  default: Granite-3.1 is a high-performance, open-source, distributed graph database.
                 model_endpoint:
                   title: Model Endpoint
                   type: string
