@@ -256,7 +256,7 @@ spec:
       action: publish:gitlab
       input:
         # repoUrl: "{{ '${{ parameters.repo.host }}' }}?owner={{ '${{ parameters.repo.owner }}' }}&repo={{ '${{parameters.component_id}}' }}"
-        repoUrl: "https://gitlab-gitlab.apps.cluster-k8ljc.k8ljc.sandbox2865.opentlc.com?owner=development&repo=${{parameters.component_id}}"
+        repoUrl: https://gitlab-gitlab.apps.cluster-k8ljc.k8ljc.sandbox2865.opentlc.com?owner=development&repo=${{parameters.component_id}}
         repoVisibility: public
 
     - id: register
