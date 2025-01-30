@@ -232,8 +232,8 @@ spec:
           owner: {{ '${{ user.entity.metadata.name }}' }}
           cluster: {{ cluster_subdomain }}
           host: {{ '${{ parameters.repo.host }}' }}
-          destination: {{ '${{ parameters.repo.owner }}' }}/{{ '${{ parameters.component_id }}' }}
-          quay_destination: {{ '${{ parameters.image_organization}}' }}/{{ '${{ parameters.component_id }}' }}
+          destination: ${{ parameters.repo.owner }}/${{ parameters.component_id }}
+          quay_destination: ${{ parameters.image_organization}}/${{ parameters.component_id }}
           port: 8080
           verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
           ai_model: {{ '${{ parameters.ai_model }}' }}
@@ -268,7 +268,7 @@ spec:
           repository_name: {{ '${{parameters.component_id}}' }}
           git_owner: {{ '${{ parameters.repo.owner }}' }}
           cluster: {{ cluster_subdomain }}
-          namespace: {{ '${{ parameters.component_id }}' }}-dev
+          namespace: ${{ parameters.component_id }}-dev
           image_registry: {{ '${{ parameters.image_registry }}' }}
           image_host: {{ '${{ parameters.image_host }}' }}
           image_organization: {{ '${{ parameters.image_organization }}' }}
