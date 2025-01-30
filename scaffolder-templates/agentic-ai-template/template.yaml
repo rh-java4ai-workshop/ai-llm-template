@@ -122,7 +122,7 @@ spec:
                   title: Model Name
                   type: string
                   description: Name of the AI Model
-                  default: Granite-3.1 is a high-performance, open-source, distributed graph database.
+                  default: granite-3.1
                 model_endpoint:
                   title: Model Endpoint
                   type: string
@@ -136,7 +136,7 @@ spec:
                   title: Model Name
                   type: string
                   description: Name of the AI Model
-                  default: Llama 3.3 is a powerful and advanced large language model developed by Meta AI.
+                  default: llama3.3
                 model_endpoint:
                   title: Model Endpoint
                   type: string
@@ -149,7 +149,7 @@ spec:
                 model_name:
                   title: Model Name
                   type: string
-                  description: Qwen-2.5 is a large language model developed by Huawei, known for its advanced capabilities in natural language understanding and generation.
+                  description: qwen2.5
                   default: qwen2.5
                 model_endpoint:
                   title: Model Endpoint
