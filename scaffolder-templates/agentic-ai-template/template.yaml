@@ -162,14 +162,17 @@ spec:
           title: Model Context Protocol (MCP) servers
           description: A Collection of Model Context Protocol (MCP) Examples for Building Agentic AI Applications with Large Language Models (LLMs)
           type: array
-          default: Filesystem
-          enum:
-            - Filesystem
-            - PostgreSQL
-            - SQLite
-            - Slack
-            - GoogleMaps
-            - Memory
+          items:
+            type: string
+            enum:
+              - Filesystem
+              - PostgreSQL
+              - SQLite
+              - Slack
+              - GoogleMaps
+              - Memory
+          uniqueItems: true
+          ui:widget: checkboxes
       dependencies:
         mcp_server:
           oneOf:
