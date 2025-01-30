@@ -103,59 +103,59 @@ spec:
           title: AI Models
           description: A Collection of AI Models for Building Agentic AI Applications
           type: string
-          default: granite-3.1
           enum:
+            - gpt-4o
             - granite-3.1
             - llama3.3
             - qwen2.5
             - deepseek-r1
             - mistral
             - phi3
-      dependencies:
-        ai_model:
-          oneOf:
-            - properties:
-                ai_model:
-                  enum:
-                    - granite-3.1
-                model_name:
-                  title: Model Name
-                  type: string
-                  description: Name of the AI Model
-                  default: granite-3.1
-                model_endpoint:
-                  title: Model Endpoint
-                  type: string
-                  description: AI Model Inference Service API
-                  default: http://granite3-predictor.aiworkshop.svc.cluster.local:8080/v1
-            - properties:
-                ai_model:
-                  enum:
-                    - llama3.3
-                model_name:
-                  title: Model Name
-                  type: string
-                  description: Name of the AI Model
-                  default: llama3.3
-                model_endpoint:
-                  title: Model Endpoint
-                  type: string
-                  description: AI Model Inference Service API
-                  default: http://llama3-predictor.aiworkshop.svc.cluster.local:8080/v1
-            - properties:
-                ai_model:
-                  enum:
-                    - qwen2.5
-                model_name:
-                  title: Model Name
-                  type: string
-                  description: qwen2.5
-                  default: qwen2.5
-                model_endpoint:
-                  title: Model Endpoint
-                  type: string
-                  description: AI Model Inference Service API
-                  default: http://qwen-2-predictor.aiworkshop.svc.cluster.local:8080/v1
+      # dependencies:
+      #   ai_model:
+      #     oneOf:
+      #       - properties:
+      #           ai_model:
+      #             enum:
+      #               - granite-3.1
+      #           model_name:
+      #             title: Model Name
+      #             type: string
+      #             description: Name of the AI Model
+      #             default: granite-3.1
+      #           model_endpoint:
+      #             title: Model Endpoint
+      #             type: string
+      #             description: AI Model Inference Service API
+      #             default: http://granite3-predictor.aiworkshop.svc.cluster.local:8080/v1
+      #       - properties:
+      #           ai_model:
+      #             enum:
+      #               - llama3.3
+      #           model_name:
+      #             title: Model Name
+      #             type: string
+      #             description: Name of the AI Model
+      #             default: llama3.3
+      #           model_endpoint:
+      #             title: Model Endpoint
+      #             type: string
+      #             description: AI Model Inference Service API
+      #             default: http://llama3-predictor.aiworkshop.svc.cluster.local:8080/v1
+      #       - properties:
+      #           ai_model:
+      #             enum:
+      #               - qwen2.5
+      #           model_name:
+      #             title: Model Name
+      #             type: string
+      #             description: qwen2.5
+      #             default: qwen2.5
+      #           model_endpoint:
+      #             title: Model Endpoint
+      #             type: string
+      #             description: AI Model Inference Service API
+      #             default: http://qwen-2-predictor.aiworkshop.svc.cluster.local:8080/v1
     - title: Model Context Protocol (MCP) Servers Information
       required:
         - mcp_server
@@ -255,7 +255,8 @@ spec:
       name: Publish
       action: publish:gitlab
       input:
-        repoUrl: "{{ '${{ parameters.repo.host }}' }}?owner={{ '${{ parameters.repo.owner }}' }}&repo={{ '${{parameters.component_id}}' }}"
+        # repoUrl: "{{ '${{ parameters.repo.host }}' }}?owner={{ '${{ parameters.repo.owner }}' }}&repo={{ '${{parameters.component_id}}' }}"
+        repoUrl: "https://gitlab-gitlab.apps.cluster-k8ljc.k8ljc.sandbox2865.opentlc.com?owner=development&repo=${{parameters.component_id}}"
         repoVisibility: public
 
     - id: register

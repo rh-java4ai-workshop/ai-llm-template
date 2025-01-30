@@ -1,6 +1,6 @@
 schemaVersion: 2.2.0
 metadata:
-  name: parasol-insurance
+  name: agentic-quarkus-app
 components:
   - name: tools
     container:

@@ -1,33 +1,57 @@
-By default the app will assume there is a chat model on https://localhost:8000/v1 that exposes an OpenAI endpoint.
+# research
 
-# Using Ollama
+This project uses Quarkus, the Supersonic Subatomic Java Framework and the
+[Model Context Protocol](https://modelcontextprotocol.io/) to implement a simple agentic app using multiple MCP servers and Quarkus + LangChain4j.
 
-If you would like to use [Ollama](https://ollama.com/) instead, first install/run Ollama on your machine. Then do one of the following:
+If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-## Building the app
-When building the app, run `./mvnw clean package -DskipTests -Pollama` (or `quarkus build --clean --no-tests -Dollama`)
+## Running the application in dev mode
 
-## Running dev mode
-When running dev mode, run `./mvnw quarkus:dev -Pollama` (or `quarkus dev -Dollama`).
+Set the approriate API keys in `application.properties` and create a directory called `playground` in your clone if you wish to use the `filesystem` MCP server.
 
-## Running tests
-When running tests, run `./mvnw verify -Pollama` (or `quarkus build --tests -Dollama`)
+You can run your application in dev mode that enables live coding using:
+```shell script
+./mvnw compile quarkus:dev
+```
+In Dev mode, you can use the Dev UI to chat with the LLM you've configured.
 
-## Running the app outside dev mode
-If you want to run the app outside dev mode, first build the app as described above, then run `java -Dquarkus.profile=ollama,prod -jar target/quarkus-app/quarkus-run.jar`
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
-# Using Jlama
+## Packaging and running the application
 
-[Jlama](https://github.com/tjake/Jlama) is a pure Java inference engine. Using it the LLM inference will be executed directly embedded in the same JVM running the Quarkus application.
+The application can be packaged using:
+```shell script
+./mvnw package
+```
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
 
-## Building the app
-When building the app, run `./mvnw clean package -DskipTests -Pjlama` (or `quarkus build --clean --no-tests -Djlama`)
+The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
 
-## Running dev mode
-When running in dev mode, Quarkus explicitly disables C2 compilation making Jlama extremely slow to the point of being unusable. This issue will be fixed in Quarkus 3.17, but for now it is strongly suggested to avoid using Jlama in dev mode.
+If you want to build an _über-jar_, execute the following command:
+```shell script
+./mvnw package -Dquarkus.package.type=uber-jar
+```
 
-## Running tests
-When running tests, run `./mvnw verify -Pjlama` (or `quarkus build --tests -Djlama`)
+The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-## Running the app
-To run the app outside dev mode first run the app as described above, then run `java --enable-preview --enable-native-access=ALL-UNNAMED --add-modules jdk.incubator.vector -Dquarkus.profile=jlama,prod -jar target/quarkus-app/quarkus-run.jar`. This command launching the JVM enabling the Vector API that are required by Jlama, but still only a preview feature.
+## Creating a native executable
+
+You can create a native executable using:
+```shell script
+./mvnw package -Dnative
+```
+
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+```shell script
+./mvnw package -Dnative -Dquarkus.native.container-build=true
+```
+
+You can then execute your native executable with: `./target/research-1.0-SNAPSHOT-runner`
+
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+
+## Related Guides
+
+- LangChain4j Model Context Protocol client ([guide](https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html)): Provides the Model Context Protocol client-side implementation for LangChain4j
+- LangChain4j OpenAI ([guide](https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html)): Provides the basic integration with LangChain4j
