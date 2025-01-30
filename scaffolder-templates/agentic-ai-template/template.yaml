@@ -160,7 +160,7 @@ spec:
       properties:
         mcp_server:
           title: Model Context Protocol (MCP) servers
-          description: A Collection of Model Context Protocol (MCP) Examples for Building Agentic AI Applications with Large Language Models (LLMs)
+          description: A Collection of Model Context Protocol (MCP) servers for Building Agentic AI Applications with Large Language Models (LLMs)
           type: array
           items:
             type: string
