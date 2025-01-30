@@ -315,7 +315,9 @@ spec:
   output:
     links:
       - title: Source Code Repository
-        url: {{ '${{ steps.publish.output.remoteUrl }}' }}
+        # url: {{ '${{ steps.publish.output.remoteUrl }}' }}
+        url: ${{ steps.publish.output.remoteUrl }}
       - title: Open Component in catalog
         icon: catalog
-        entityRef: {{ '${{ steps.register.output.entityRef }}' }}
+        # entityRef: {{ '${{ steps.register.output.entityRef }}' }}
+        entityRef: ${{ steps.register.output.entityRef }}
