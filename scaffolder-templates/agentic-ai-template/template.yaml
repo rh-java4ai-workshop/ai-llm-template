@@ -167,12 +167,13 @@ spec:
           items:
             type: string
             enum:
-              - Filesystem
+              - BraveSearch 
               - PostgreSQL
               - SQLite
-              - Slack
               - GoogleMaps
               - Memory
+              - Filesystem
+              - Slack
           uniqueItems: true
           ui:widget: checkboxes
       # dependencies:
