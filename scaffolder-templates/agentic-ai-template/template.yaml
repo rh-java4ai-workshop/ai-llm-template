@@ -83,7 +83,8 @@ spec:
                   title: Image Host
                   type: string
                   description: Host for storing image
-                  default: {{ quay_host }}
+                  # default: {{ quay_host }}
+                  default: quay-k8ljc.apps.cluster-k8ljc.k8ljc.sandbox2865.opentlc.com
                 image_organization:
                   title: Organization
                   type: string
@@ -206,14 +207,16 @@ spec:
               title: Repo Host
               type: string
               description: Your SCM host
-              default: {{ gitlab_host }}
+              # default: {{ gitlab_host }}
+              default: gitlab-gitlab.apps.cluster-k8ljc.k8ljc.sandbox2865.opentlc.com
               enum:
                 - {{ gitlab_host }}
             owner:
               title: Repo Owner
               type: string
               description: Your SCM host organization/group
-              default: {{ gitlab_destination_group }}
+              # default: {{ gitlab_destination_group }}
+              default: development
               enum:
                 - {{ gitlab_destination_group }}
 
