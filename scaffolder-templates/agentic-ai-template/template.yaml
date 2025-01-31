@@ -131,26 +131,6 @@ spec:
               - Slack
           uniqueItems: true
           ui:widget: checkboxes
-      # dependencies:
-      #   mcp_server:
-      #     oneOf:
-      #       - properties:
-      #           mcp_server:
-      #             enum:
-      #               - Filesystem
-      #           file_path:
-      #             title: File Path
-      #             type: string
-      #             description: Reads complete file contents with UTF-8 encoding
-      #             default: /projects/path/to/file.txt
-      #       - properties:
-      #           mcp_server:
-      #             enum:
-      #               - PostgreSQL
-      #           psql_host:
-      #             title: PostgreSQL Host
-      #             type: string
-      #             description: PostgreSQL Host
     - title: Application repository Information
       required:
         - repo
