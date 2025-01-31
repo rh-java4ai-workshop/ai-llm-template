@@ -151,7 +151,6 @@ spec:
       #             title: PostgreSQL Host
       #             type: string
       #             description: PostgreSQL Host
-      #             default: {{ postgres_host }}
     - title: Application repository Information
       required:
         - repo
