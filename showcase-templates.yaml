@@ -7,3 +7,4 @@ spec:
   type: url
   targets:
      - scaffolder-templates/parasol-java-template/template.yaml
+     - scaffolder-templates/agentic-ai-template/template.yaml
