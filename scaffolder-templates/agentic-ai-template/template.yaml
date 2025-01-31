@@ -231,25 +231,36 @@ spec:
         copyWithoutTemplating:
           - .github/workflows/*
         values:
-          component_id: {{ '${{ parameters.component_id }}' }}
-          description: {{ '${{ parameters.description }}' }}
+          # component_id: {{ '${{ parameters.component_id }}' }}
+          # description: {{ '${{ parameters.description }}' }}
           # namespace: {{ '${{ parameters.component_id }}' }}-dev
-          namespace: '${{ parameters.component_id }}-dev'
-          group_id: {{ '${{ parameters.group_id }}' }}
-          artifact_id: {{ '${{ parameters.artifact_id }}' }}
-          java_package_name: {{ '${{ parameters.java_package_name }}' }}
-          owner: {{ '${{ user.entity.metadata.name }}' }}
-          cluster: {{ cluster_subdomain }}
-          host: {{ '${{ parameters.repo.host }}' }}
+          # group_id: {{ '${{ parameters.group_id }}' }}
+          # artifact_id: {{ '${{ parameters.artifact_id }}' }}
+          # java_package_name: {{ '${{ parameters.java_package_name }}' }}
+          # owner: {{ '${{ user.entity.metadata.name }}' }}
+          # cluster: {{ cluster_subdomain }}
+          # host: {{ '${{ parameters.repo.host }}' }}
           # destination: {{ '${{ parameters.repo.owner }}' }}/{{ '${{ parameters.component_id }}' }}
           # quay_destination: {{ '${{ parameters.image_organization}}' }}/{{ '${{ parameters.component_id }}' }}
+          # port: 8080
+          # verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
+          # ai_model: {{ '${{ parameters.ai_model }}' }}
+          # mcp_server: {{ '${{ parameters.mcp_server }}' }}
+          component_id: ${{ parameters.component_id }}
+          description: ${{ parameters.description }}
+          namespace: ${{ parameters.component_id }}-dev
+          group_id: ${{ parameters.group_id }}
+          artifact_id: ${{ parameters.artifact_id }}
+          java_package_name: ${{ parameters.java_package_name }}
+          owner: ${{ user.entity.metadata.name }}
+          cluster: {{ cluster_subdomain }}
+          host: ${{ parameters.repo.host }}
           destination: ${{ parameters.repo.owner }}/${{ parameters.component_id }}
           quay_destination: ${{ parameters.image_organization}}/${{ parameters.component_id }}
           port: 8080
-          verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
-          ai_model: {{ '${{ parameters.ai_model }}' }}
-          mcp_server: {{ '${{ parameters.mcp_server }}' }}
-          file_path: {{ '${{ parameters.mcp_server.file_path }}' }}
+          verify_commits: ${{ parameters.repo.verify_commits }}
+          ai_model: ${{ parameters.ai_model }}
+          mcp_server: ${{ parameters.mcp_server }}
 
     - id: publish
       name: Publish
@@ -263,7 +274,8 @@ spec:
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: {{ '${{ steps.publish.output.repoContentsUrl }}' }}
+        # repoContentsUrl: {{ '${{ steps.publish.output.repoContentsUrl }}' }}
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: "/catalog-info.yaml"
 
     - id: template-gitops-deployment
@@ -273,37 +285,58 @@ spec:
         url: ./manifests
         copyWithoutTemplating: []
         values:
-          component_id: {{ '${{ parameters.component_id }}' }}
-          description: {{ '${{ parameters.description }}' }}
-          destination: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{parameters.component_id}}' }}-gitops.git
-          source_repository: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{parameters.component_id}}' }}.git
-          repository_name: {{ '${{parameters.component_id}}' }}
-          git_owner: {{ '${{ parameters.repo.owner }}' }}
-          cluster: {{ cluster_subdomain }}
+          # component_id: {{ '${{ parameters.component_id }}' }}
+          # description: {{ '${{ parameters.description }}' }}
+          # destination: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{parameters.component_id}}' }}-gitops.git
+          # source_repository: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{parameters.component_id}}' }}.git
+          # repository_name: {{ '${{parameters.component_id}}' }}
+          # git_owner: {{ '${{ parameters.repo.owner }}' }}
+          # cluster: {{ cluster_subdomain }}
           # namespace: {{ '${{ parameters.component_id }}' }}-dev
+          # image_registry: {{ '${{ parameters.image_registry }}' }}
+          # image_host: {{ '${{ parameters.image_host }}' }}
+          # image_organization: {{ '${{ parameters.image_organization }}' }}
+          # image_name: {{ '${{ parameters.component_id }}' }}
+          # image_tag: {{ '${{ parameters.image_tag }}' }}
+          # port: 8080
+          # repository_host: {{ '${{ parameters.repo.host }}' }}
+          # deployment_name: agentic-quarkus-app
+          # user: {{ '${{ user.entity.metadata.name }}' }}
+          # verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
+          # ai_model: {{ '${{ parameters.ai_model }}' }}
+          # mcp_server: {{ '${{ parameters.mcp_server }}' }}
+          component_id: ${{ parameters.component_id }}
+          description: ${{ parameters.description }}
+          destination: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{ parameters.component_id }}-gitops.git
+          source_repository: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{ parameters.component_id }}.git
+          repository_name: ${{parameters.component_id}}
+          git_owner: ${{ parameters.repo.owner }}
+          cluster: {{ cluster_subdomain }}
           namespace: ${{ parameters.component_id }}-dev
-          image_registry: {{ '${{ parameters.image_registry }}' }}
-          image_host: {{ '${{ parameters.image_host }}' }}
-          image_organization: {{ '${{ parameters.image_organization }}' }}
-          image_name: {{ '${{ parameters.component_id }}' }}
-          image_tag: {{ '${{ parameters.image_tag }}' }}
+          image_registry: ${{ parameters.image_registry }}
+          image_host: ${{ parameters.image_host }}
+          image_organization: ${{ parameters.image_organization }}
+          image_name: ${{ parameters.component_id }}
+          image_tag: ${{ parameters.image_tag }}
           port: 8080
-          repository_host: {{ '${{ parameters.repo.host }}' }}
-          deployment_name: quarkus-template
-          user: {{ '${{ user.entity.metadata.name }}' }}
-          verify_commits: {{ '${{ parameters.repo.verify_commits }}' }}
-          ai_model: {{ '${{ parameters.ai_model }}' }}
-          mcp_server: {{ '${{ parameters.mcp_server }}' }}
-          file_path: {{ '${{ parameters.mcp_server.file_path }}' }}
+          repository_host: ${{ parameters.repo.host }}
+          deployment_name: agentic-quarkus-app
+          user: ${{ user.entity.metadata.name }}
+          verify_commits: ${{ parameters.repo.verify_commits }}
+          ai_model: ${{ parameters.ai_model }}
+          mcp_server: ${{ parameters.mcp_server }}
         targetPath: ./tenant-gitops
 
     - id: publish-gitops
       name: Publishing to Resource Repository
       action: publish:gitlab
       input:
-        repoUrl: "{{ '${{ parameters.repo.host }}' }}?owner={{ '${{ parameters.repo.owner }}' }}&repo={{ '${{parameters.component_id}}' }}-gitops"
-        title: gitops resources for {{ '${{ parameters.component_id }}' }}
-        description: gitops resources for {{ '${{ parameters.component_id }}' }}
+        # repoUrl: "{{ '${{ parameters.repo.host }}' }}?owner={{ '${{ parameters.repo.owner }}' }}&repo={{ '${{parameters.component_id}}' }}-gitops"
+        # title: gitops resources for {{ '${{ parameters.component_id }}' }}
+        # description: gitops resources for {{ '${{ parameters.component_id }}' }}
+        repoUrl: ${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}-gitops
+        title: gitops resources for ${{ parameters.component_id }}
+        description: gitops resources for ${{ parameters.component_id }}
         sourcePath: ./tenant-gitops
         repoVisibility: public
 
@@ -315,7 +348,8 @@ spec:
         appName: ${{ parameters.component_id }}-bootstrap
         argoInstance: main
         namespace: janus-argocd
-        repoUrl: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{ parameters.component_id }}' }}-gitops.git
+        # repoUrl: https://{{ '${{ parameters.repo.host }}' }}/{{ '${{ parameters.repo.owner }}' }}/{{ '${{ parameters.component_id }}' }}-gitops.git
+        repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{ parameters.component_id }}-gitops.git
         path: 'argocd/'
 
   output:
