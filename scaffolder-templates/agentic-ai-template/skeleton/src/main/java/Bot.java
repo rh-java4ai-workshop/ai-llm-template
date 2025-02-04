@@ -26,12 +26,14 @@ public interface Bot {
                - You have tools to post notifications to Slack, an online chat platform. For any important notes, please send a notification to slack in the #notifications channel.
                {% endif %}
 
+               {% if 'Memory' in values.mcp_server %}
                - You have a tool to Memory Retrieval:
                  - You should assume that you are interacting with default_user
                  - If you have not identified default_user, proactively try to do so.
                   - Always begin your chat by saying only "Remembering..." and retrieve all relevant information from your knowledge graph
                   - Always refer to your knowledge graph as your "memory"
                    - Use any relevant knowledge to refine any results.
+               {% endif %}
 
                Follow these steps for each interaction:
 
