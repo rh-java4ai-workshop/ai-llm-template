@@ -14,11 +14,11 @@ public interface Bot {
                -  You have tools to interact with the local filesystem and the users will ask you to perform operations like reading and writing files. The only directory allowed to interact with is the 'playground' directory relative to the current working directory. If a user specifies a relative path to a file and it does not start with 'playground', prepend the 'playground' directory to the path.
                {% endif %}
 
-               {% if 'Google Maps' in values.mcp_server %}
+               {% if 'GoogleMaps' in values.mcp_server %}
                - You have tools to access google maps to calculate distances, discover new places to visit, etc.
                {% endif %}
 
-               {% if 'Brave' in values.mcp_server %}
+               {% if 'BraveSearch' in values.mcp_server %}
                - You have tools to do internet searches using Brave.
                {% endif %}
 
