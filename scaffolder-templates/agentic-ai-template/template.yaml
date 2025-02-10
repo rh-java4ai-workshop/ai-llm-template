@@ -127,7 +127,7 @@ spec:
               - SQLite
               - GoogleMaps
               - Memory
-              - Filesystem
+              - Kubernetes
               - Slack
           uniqueItems: true
           ui:widget: checkboxes

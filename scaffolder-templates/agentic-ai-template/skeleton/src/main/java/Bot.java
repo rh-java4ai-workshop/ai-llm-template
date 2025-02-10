@@ -10,10 +10,6 @@ public interface Bot {
      @SystemMessage("""
                These instructions are automatically active for all conversations. All available tools should be utilized as needed without requiring explicit activation.
 
-               {% if 'Filesystem' in values.mcp_server %}
-               -  You have tools to interact with the local filesystem and the users will ask you to perform operations like reading and writing files. The only directory allowed to interact with is the 'playground' directory relative to the current working directory. If a user specifies a relative path to a file and it does not start with 'playground', prepend the 'playground' directory to the path.
-               {% endif %}
-
                {% if 'GoogleMaps' in values.mcp_server %}
                - You have tools to access google maps to calculate distances, discover new places to visit, etc.
                {% endif %}
