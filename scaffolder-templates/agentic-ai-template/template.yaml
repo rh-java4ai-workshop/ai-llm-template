@@ -83,8 +83,7 @@ spec:
                   title: Image Host
                   type: string
                   description: Host for storing image
-                  # default: {{ quay_host }}
-                  default: quay-k8ljc.apps.cluster-k8ljc.k8ljc.sandbox2865.opentlc.com
+                  default: {{ quay_host }}
                 image_organization:
                   title: Organization
                   type: string
