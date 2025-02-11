@@ -48,7 +48,6 @@ spec:
       - -DGOOGLE_MAPS_API_KEY=dummy 
       - -DSLACK_BOT_TOKEN=dummy 
       - -DSLACK_TEAM_ID=dummy
-
     taskRef:
       kind: ClusterTask
       name: maven
