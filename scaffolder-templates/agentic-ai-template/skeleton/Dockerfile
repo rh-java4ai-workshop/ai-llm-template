@@ -79,6 +79,25 @@ FROM registry.access.redhat.com/ubi9/openjdk-21
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 
+# Use bash for the shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Create a script file sourced by both interactive and non-interactive bash shells
+ENV BASH_ENV /home/default/.bash_env
+RUN touch "${BASH_ENV}"
+RUN echo '. "${BASH_ENV}"' >> ~/.bashrc
+
+# Download and install nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | PROFILE="${BASH_ENV}" bash
+RUN echo node > .nvmrc
+USER root
+RUN microdnf install -y gzip
+RUN nvm install
+
+RUN npm install @modelcontextprotocol/server-brave-search@0.6.2
+RUN npm install @modelcontextprotocol/server-google-maps@0.6.2
+RUN npm install @modelcontextprotocol/server-memory@0.6.2
+RUN npm install @modelcontextprotocol/server-slack@0.6.2
 
 # We make four distinct layers so if there are application changes the library layers can be re-used
 COPY --chown=185 target/quarkus-app/lib/ /deployments/lib/
