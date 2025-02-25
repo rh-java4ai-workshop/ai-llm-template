@@ -39,6 +39,9 @@ spec:
               containerPort: 8080
               protocol: TCP
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: agentic-ai-tokens
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.env }}
