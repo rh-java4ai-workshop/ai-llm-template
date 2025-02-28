@@ -7,7 +7,7 @@ import jakarta.enterprise.context.SessionScoped;
 
 @RegisterAiService
 @SessionScoped
-@OutputGuardrails(CalendarGuardrail.class)
+//@OutputGuardrails(CalendarGuardrail.class)
 public interface Bot {
 
     @SystemMessage("""
@@ -57,6 +57,5 @@ These instructions are automatically active for all conversations. All available
 
             """
     )
-//    @OutputGuardrails(CalendarGuardrail.class)
     Multi<String> chat(@UserMessage String question);
 }
