@@ -91,9 +91,16 @@ RUN echo '. "${BASH_ENV}"' >> ~/.bashrc
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | PROFILE="${BASH_ENV}" bash
 RUN echo node > .nvmrc
 USER root
-RUN microdnf install -y gzip
+RUN microdnf install -y gzip python39 python39-devel gcc make
+# Install uv (using pipx)
+RUN python39 -m pip install pipx && \
+    python39 -m pipx ensurepath && \
+    pipx install uv
+
 RUN nvm install
 
+RUN mkdir -p /home/default/playground
+RUN npm install @modelcontextprotocol/server-filesystem@0.6.2
 RUN npm install @modelcontextprotocol/server-brave-search@0.6.2
 RUN npm install @modelcontextprotocol/server-google-maps@0.6.2
 RUN npm install @modelcontextprotocol/server-memory@0.6.2
