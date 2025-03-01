@@ -90,11 +90,15 @@ RUN echo '. "${BASH_ENV}"' >> ~/.bashrc
 # Download and install nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | PROFILE="${BASH_ENV}" bash
 RUN echo node > .nvmrc
+
 USER root
-RUN microdnf install -y gzip python39 python39-devel gcc make
+
+RUN microdnf install -y gzip python3 python3-pip
 # Install uv (using pipx)
-RUN python39 -m pip install pipx && \
-    python39 -m pipx ensurepath && \
+RUN python3 -m ensurepip && \
+    python3 -m pip install --upgrade pip && \
+    python3 -m pip install pipx && \
+    pipx ensurepath && \
     pipx install uv
 
 RUN nvm install
