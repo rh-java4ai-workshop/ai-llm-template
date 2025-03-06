@@ -89,7 +89,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <build>
+  <build> 
     <plugins>
       <plugin>
         <groupId>${quarkus.platform.group-id}</groupId>
