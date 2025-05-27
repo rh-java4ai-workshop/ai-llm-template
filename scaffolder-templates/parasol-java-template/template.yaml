@@ -2,16 +2,16 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: ai-llm-template
-  title: Parasol Insurance for Red Hat AI App Development (RAD) Workshop
-  description: Create the Parasol Insurance Application for Red Hat AI App Development (RAD) Workshop
+  title: Parasol Insurance for Java for AI Hands-on Workshop
+  description: Create the Parasol Insurance Application for Java for AI Hands-on Workshop
   tags:
     - java
     - ai
     - llm
-    - redhatai
+    - java4ai
     - workshop
 spec:
-  owner: rad-workshop-authors
+  owner: java4ai-workshop-authors
   type: service
 
   parameters:
