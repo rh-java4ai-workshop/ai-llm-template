@@ -1,19 +1,19 @@
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
 import io.quarkiverse.langchain4j.RegisterAiService;
-import io.quarkiverse.langchain4j.guardrails.OutputGuardrails;
 import io.smallrye.mutiny.Multi;
 import jakarta.enterprise.context.SessionScoped;
 
 @RegisterAiService
 @SessionScoped
-//@OutputGuardrails(CalendarGuardrail.class)
 public interface Bot {
 
     @SystemMessage("""
 You are a helpful personal assistant, executing tasks as requested.
 
-These instructions are automatically active for all conversations. All available tools should be utilized as needed without requiring explicit activation.
+These instructions are automatically active for all conversations. 
+
+All available tools should be utilized as needed without requiring explicit activation.
 
 Always look up the current date and time so you know what the current date and time is for scheduling items.
 
